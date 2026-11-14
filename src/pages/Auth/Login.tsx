@@ -1,5 +1,16 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  FaUser,
+  FaHospital,
+  FaBolt,
+  FaEye,
+  FaEyeSlash,
+  FaArrowLeft,
+  FaExclamationTriangle,
+  FaLock,
+  FaCheckCircle,
+} from 'react-icons/fa';
 import './login.css';
 
 interface LoginProps {
@@ -11,19 +22,25 @@ const CREDENCIAIS_FAKE = {
   patient: {
     email: 'paciente@medcentral.com',
     senha: 'paciente123',
-    nome: 'João Silva'
+    nome: 'João Silva',
   },
   clinic: {
     email: 'clinica@medcentral.com',
     senha: 'clinica123',
-    nome: 'Clínica São Paulo'
+    nome: 'Clínica São Paulo',
   },
   admin: {
     email: 'admin@medcentral.com',
     senha: 'admin123',
-    nome: 'Administrador'
-  }
+    nome: 'Administrador',
+  },
 };
+
+const TIPOS = [
+  { id: 'patient' as const, label: 'Paciente', icon: <FaUser /> },
+  { id: 'clinic' as const, label: 'Clínica', icon: <FaHospital /> },
+  { id: 'admin' as const, label: 'Admin', icon: <FaBolt /> },
+];
 
 function Login({ onLogin }: LoginProps) {
   const navigate = useNavigate();
@@ -37,14 +54,11 @@ function Login({ onLogin }: LoginProps) {
     e.preventDefault();
     setErro('');
 
-    // Validação fake
     const credencial = CREDENCIAIS_FAKE[tipoUsuario];
-    
+
     if (email === credencial.email && senha === credencial.senha) {
-      // Login bem-sucedido
       onLogin(credencial.nome, tipoUsuario);
     } else {
-      // Credenciais inválidas
       setErro('Email ou senha incorretos. Tente novamente.');
     }
   };
@@ -59,68 +73,56 @@ function Login({ onLogin }: LoginProps) {
     setSenha(credencial.senha);
   };
 
+  const tipoLabel =
+    tipoUsuario === 'patient' ? 'Paciente' : tipoUsuario === 'clinic' ? 'Clínica' : 'Admin';
+
   return (
     <div className="login-container">
+      <button onClick={handleVoltar} className="btn-voltar-landing">
+        <FaArrowLeft />
+        Voltar para Início
+      </button>
 
-      <div className="login-card">
+      <div className="login-card glass-strong anim-rise">
         <div className="login-header">
+          <span className="login-logo">
+            <img src="/LOGO-MEDCENTRAL-SemFundo.png" alt="MedCentral" />
+          </span>
+          <span className="login-eyebrow">
+            <FaLock /> Ambiente seguro
+          </span>
           <h1>MedCentral</h1>
           <p>Sistema de Agendamento Médico</p>
         </div>
 
         {/* Seleção de Tipo de Usuário */}
         <div className="user-type-selector">
-          <button
-            type="button"
-            className={`type-btn ${tipoUsuario === 'patient' ? 'active' : ''}`}
-            onClick={() => {
-              setTipoUsuario('patient');
-              setErro('');
-              setEmail('');
-              setSenha('');
-            }}
-          >
-            <span className="type-icon">👤</span>
-            <span>Paciente</span>
-          </button>
-          <button
-            type="button"
-            className={`type-btn ${tipoUsuario === 'clinic' ? 'active' : ''}`}
-            onClick={() => {
-              setTipoUsuario('clinic');
-              setErro('');
-              setEmail('');
-              setSenha('');
-            }}
-          >
-            <span className="type-icon">🏥</span>
-            <span>Clínica</span>
-          </button>
-          <button
-            type="button"
-            className={`type-btn ${tipoUsuario === 'admin' ? 'active' : ''}`}
-            onClick={() => {
-              setTipoUsuario('admin');
-              setErro('');
-              setEmail('');
-              setSenha('');
-            }}
-          >
-            <span className="type-icon">⚡</span>
-            <span>Admin</span>
-          </button>
+          {TIPOS.map((tipo) => (
+            <button
+              key={tipo.id}
+              type="button"
+              className={`type-btn ${tipoUsuario === tipo.id ? 'active' : ''}`}
+              onClick={() => {
+                setTipoUsuario(tipo.id);
+                setErro('');
+                setEmail('');
+                setSenha('');
+              }}
+            >
+              <span className="type-icon">{tipo.icon}</span>
+              <span>{tipo.label}</span>
+            </button>
+          ))}
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
-          {/* Mensagem de Erro */}
           {erro && (
             <div className="erro-mensagem">
-              <span className="erro-icon">⚠️</span>
+              <FaExclamationTriangle className="erro-icon" />
               <span>{erro}</span>
             </div>
           )}
 
-          {/* Campo Email */}
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -129,11 +131,11 @@ function Login({ onLogin }: LoginProps) {
               placeholder="Digite seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
               required
             />
           </div>
 
-          {/* Campo Senha */}
           <div className="form-group">
             <label htmlFor="senha">Senha</label>
             <div className="senha-input-wrapper">
@@ -143,6 +145,7 @@ function Login({ onLogin }: LoginProps) {
                 placeholder="Digite sua senha"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
+                autoComplete="current-password"
                 required
               />
               <button
@@ -151,37 +154,32 @@ function Login({ onLogin }: LoginProps) {
                 onClick={() => setMostrarSenha(!mostrarSenha)}
                 aria-label={mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'}
               >
-                {mostrarSenha ? '👁️' : '👁️‍🗨️'}
+                {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
           </div>
 
           <button type="submit" className="btn-primary">
-            Entrar como {tipoUsuario === 'patient' ? 'Paciente' : tipoUsuario === 'clinic' ? 'Clínica' : 'Admin'}
+            Entrar como {tipoLabel}
           </button>
         </form>
 
-        {/* Credenciais de Teste */}
         <div className="login-footer">
-          <p className="demo-info">Versão de demonstração</p>
-          <button
-            type="button"
-            className="btn-demo"
-            onClick={preencherCredenciais}
-          >
+          <p className="demo-info">
+            <FaCheckCircle /> Versão de demonstração
+          </p>
+          <button type="button" className="btn-demo" onClick={preencherCredenciais}>
             Preencher credenciais de teste
           </button>
           <div className="credentials-info">
-            <p><strong>{tipoUsuario === 'patient' ? 'Paciente' : tipoUsuario === 'clinic' ? 'Clínica' : 'Admin'}:</strong></p>
+            <p>
+              <strong>{tipoLabel}:</strong>
+            </p>
             <p>Email: {CREDENCIAIS_FAKE[tipoUsuario].email}</p>
             <p>Senha: {CREDENCIAIS_FAKE[tipoUsuario].senha}</p>
           </div>
         </div>
       </div>
-      {/* Botão Voltar */}
-      <button onClick={handleVoltar} className="btn-voltar-landing">
-        ← Voltar para Início
-      </button>
     </div>
   );
 }

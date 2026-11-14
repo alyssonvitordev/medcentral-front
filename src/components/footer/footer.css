@@ -1,57 +1,75 @@
+/* ============================================================
+   Global Footer — Liquid Glass
+   ============================================================ */
+
 .footer {
-  background: white;
-  border-top: 1px solid #e2e8f0;
-  margin-top: auto;
+  margin: 20px auto 16px;
+  width: calc(100% - 32px);
+  max-width: 1200px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.34);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow: inset 0 1px 0 #fff, 0 20px 44px -30px rgba(13, 71, 161, 0.5);
 }
 
 .footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 14px;
+  padding: 18px 24px;
 }
 
 .footer-content p {
-  color: #718096;
-  font-size: 14px;
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-500);
 }
 
 .github-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #1a202c;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 1px 0 #fff;
+  color: var(--ink-600);
+  font-size: 12px;
+  font-weight: 600;
+  transition: transform 0.35s var(--ease-out-expo), background 0.35s var(--ease-smooth),
+    color 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-out-expo);
 }
 
 .github-link:hover {
-  color: var(--primary-blue);
-  background: rgba(37, 151, 254, 0.05);
+  color: var(--blue-700);
+  background: rgba(255, 255, 255, 0.72);
   transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 #fff, 0 12px 24px -16px rgba(13, 71, 161, 0.55);
 }
 
 .github-link svg {
-  transition: transform 0.3s ease;
+  transition: transform 0.4s var(--ease-spring);
 }
 
 .github-link:hover svg {
-  transform: scale(1.1);
+  transform: scale(1.12) rotate(-6deg);
 }
 
 @media (max-width: 640px) {
+  .footer {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+  }
+
   .footer-content {
     flex-direction: column;
     text-align: center;
-    padding: 20px 16px;
+    padding: 16px;
   }
 
   .github-link {

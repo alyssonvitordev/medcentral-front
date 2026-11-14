@@ -1,4 +1,21 @@
 import { useState } from 'react';
+import {
+  FaHospital,
+  FaClipboardList,
+  FaCog,
+  FaCalendarAlt,
+  FaChartBar,
+  FaMoneyBillWave,
+  FaStar,
+  FaClock,
+  FaChartLine,
+  FaBell,
+  FaPlus,
+  FaUserMd,
+  FaComments,
+  FaCheck,
+  FaExclamationTriangle,
+} from 'react-icons/fa';
 import Navbar from '../../../../components/navbar/navbar';
 import './clinicDashboard.css';
 
@@ -60,10 +77,10 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
   ];
 
   const recentActivity = [
-    { icon: '✓', type: 'success', text: 'Nova consulta confirmada', time: '5 minutos atrás' },
-    { icon: '📅', type: 'info', text: 'Consulta reagendada', time: '1 hora atrás' },
-    { icon: '⚠️', type: 'warning', text: 'Lembrete de pagamento enviado', time: '2 horas atrás' },
-    { icon: '💰', type: 'success', text: 'Pagamento recebido - R$ 150', time: '3 horas atrás' }
+    { icon: <FaCheck />, type: 'success', text: 'Nova consulta confirmada', time: '5 minutos atrás' },
+    { icon: <FaCalendarAlt />, type: 'info', text: 'Consulta reagendada', time: '1 hora atrás' },
+    { icon: <FaExclamationTriangle />, type: 'warning', text: 'Lembrete de pagamento enviado', time: '2 horas atrás' },
+    { icon: <FaMoneyBillWave />, type: 'success', text: 'Pagamento recebido - R$ 150', time: '3 horas atrás' }
   ];
 
   const calendarDays = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -75,12 +92,12 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
       <div className="clinic-header">
         <div className="clinic-header-content">
           <div className="clinic-header-left">
-            <h1>🏥 {nomeUsuario}</h1>
+            <h1><FaHospital className="title-icon" /> {nomeUsuario}</h1>
             <span className="clinic-subtitle">Painel de Gerenciamento da Clínica</span>
           </div>
           <div className="clinic-header-right">
-            <button className="header-btn">📋 Relatórios</button>
-            <button className="header-btn">⚙️ Configurações</button>
+            <button className="header-btn"><FaClipboardList /> Relatórios</button>
+            <button className="header-btn"><FaCog /> Configurações</button>
           </div>
         </div>
       </div>
@@ -92,7 +109,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
             <div className="metric-card">
               <div className="metric-header">
                 <h3>Consultas de Hoje</h3>
-                <span className="metric-icon">📅</span>
+                <span className="metric-icon"><FaCalendarAlt /></span>
               </div>
               <div className="metric-value">24</div>
               <div className="metric-change positive">+3 em relação a ontem</div>
@@ -101,7 +118,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
             <div className="metric-card">
               <div className="metric-header">
                 <h3>Total Semanal</h3>
-                <span className="metric-icon">📊</span>
+                <span className="metric-icon"><FaChartBar /></span>
               </div>
               <div className="metric-value">156</div>
               <div className="metric-change positive">+12% em relação à semana passada</div>
@@ -110,7 +127,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
             <div className="metric-card">
               <div className="metric-header">
                 <h3>Receita Este Mês</h3>
-                <span className="metric-icon">💰</span>
+                <span className="metric-icon"><FaMoneyBillWave /></span>
               </div>
               <div className="metric-value">R$ 45.280</div>
               <div className="metric-change positive">+8% em relação ao mês passado</div>
@@ -119,7 +136,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
             <div className="metric-card">
               <div className="metric-header">
                 <h3>Satisfação dos Pacientes</h3>
-                <span className="metric-icon">⭐</span>
+                <span className="metric-icon"><FaStar /></span>
               </div>
               <div className="metric-value">4.8/5</div>
               <div className="metric-change neutral">Baseado em 127 avaliações</div>
@@ -130,7 +147,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
           <div className="dashboard-row">
             <div className="dashboard-card">
               <div className="card-header">
-                <h3>📅 Novembro 2025</h3>
+                <h3><FaCalendarAlt /> Novembro 2025</h3>
                 <div className="calendar-nav">
                   <button className="nav-btn">‹</button>
                   <button className="nav-btn">›</button>
@@ -161,7 +178,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
 
             <div className="dashboard-card">
               <div className="card-header">
-                <h3>⏰ Agenda de Hoje</h3>
+                <h3><FaClock /> Agenda de Hoje</h3>
                 <span className="schedule-count">{appointments.length} consultas</span>
               </div>
               <div className="schedule-list">
@@ -185,7 +202,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
           <div className="dashboard-row">
             <div className="dashboard-card">
               <div className="card-header">
-                <h3>📈 Tendências Semanais de Consultas</h3>
+                <h3><FaChartLine /> Tendências Semanais de Consultas</h3>
               </div>
               <div className="weekly-chart">
                 <div className="chart-bars">
@@ -206,7 +223,7 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
 
             <div className="dashboard-card">
               <div className="card-header">
-                <h3>🔔 Atividade Recente</h3>
+                <h3><FaBell /> Atividade Recente</h3>
               </div>
               <div className="activity-list">
                 {recentActivity.map((activity, index) => (
@@ -227,19 +244,19 @@ function ClinicDashboard({ nomeUsuario, onLogout }: ClinicDashboardProps) {
             <h3>Ações Rápidas</h3>
             <div className="actions-grid">
               <button className="action-btn">
-                <span className="action-icon">➕</span>
+                <span className="action-icon"><FaPlus /></span>
                 <span className="action-text">Nova Consulta</span>
               </button>
               <button className="action-btn">
-                <span className="action-icon">👤</span>
+                <span className="action-icon"><FaUserMd /></span>
                 <span className="action-text">Adicionar Médico</span>
               </button>
               <button className="action-btn">
-                <span className="action-icon">📊</span>
+                <span className="action-icon"><FaChartBar /></span>
                 <span className="action-text">Ver Relatórios</span>
               </button>
               <button className="action-btn">
-                <span className="action-icon">💬</span>
+                <span className="action-icon"><FaComments /></span>
                 <span className="action-text">Enviar Lembretes</span>
               </button>
             </div>

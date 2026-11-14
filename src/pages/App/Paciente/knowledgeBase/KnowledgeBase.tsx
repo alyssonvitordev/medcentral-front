@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { FaBook, FaCalendarAlt, FaSave, FaArrowRight } from 'react-icons/fa';
 import Navbar from '../../../../components/navbar/navbar';
 import './knowledgeBase.css';
 
@@ -30,9 +31,9 @@ function KnowledgeBase({
       titulo: 'Manual do Usuário - Sistema MedCentral',
       descricao: 'Guia completo de utilização do sistema de agendamento',
       categoria: 'Manuais',
-      url: '/docs/manual-usuario.pdf',
-      dataCriacao: '15/10/2025',
-      tamanho: '2.5 MB'
+      url: '/docs/MedCentral-Manual-do-Usuario.pdf',
+      dataCriacao: '14/11/2026',
+      tamanho: '4 MB'
     },
     {
       id: 2,
@@ -105,7 +106,7 @@ function KnowledgeBase({
         <div className="knowledge-base-content">
           <div className="kb-header">
             <div className="kb-title-section">
-              <h2>📚 Base de Conhecimento</h2>
+              <h2><FaBook className="title-icon" /> Base de Conhecimento</h2>
               <p>Documentos, manuais e guias do MedCentral</p>
             </div>
           </div>
@@ -157,8 +158,8 @@ function KnowledgeBase({
                   <p>{doc.descricao}</p>
                   
                   <div className="document-meta">
-                    <span className="doc-date">📅 {doc.dataCriacao}</span>
-                    <span className="doc-size">💾 {doc.tamanho}</span>
+                    <span className="doc-date"><FaCalendarAlt /> {doc.dataCriacao}</span>
+                    <span className="doc-size"><FaSave /> {doc.tamanho}</span>
                   </div>
                 </div>
 
@@ -166,7 +167,7 @@ function KnowledgeBase({
                   className="btn-open-doc"
                   onClick={() => abrirDocumento(doc.url)}
                 >
-                  Abrir Documento →
+                  Abrir Documento <FaArrowRight />
                 </button>
               </div>
             ))}

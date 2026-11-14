@@ -1,25 +1,28 @@
 import { useState, useEffect } from 'react';
 import './chatbot.css';
 
+const CHATBOT_SCRIPT_SRC =
+  'https://cdn.jotfor.ms/agent/embedjs/0199f3a548b0786299d682ce98cdfe96e0f8/embed.js';
+let chatbotScriptRequested = false;
+
 function ChatbotButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Carrega o script do chatbot apenas uma vez
-    if (!isLoaded) {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jotfor.ms/agent/embedjs/0199f3a548b0786299d682ce98cdfe96e0f8/embed.js';
-      script.async = true;
-      document.body.appendChild(script);
-      setIsLoaded(true);
-
-      return () => {
-        // Cleanup: remove o script quando o componente for desmontado
-        document.body.removeChild(script);
-      };
+    // Injeta o script do chatbot apenas uma vez (evita duplicação no StrictMode)
+    if (chatbotScriptRequested) return;
+    if (document.querySelector(`script[src="${CHATBOT_SCRIPT_SRC}"]`)) {
+      chatbotScriptRequested = true;
+      return;
     }
-  }, [isLoaded]);
+
+    chatbotScriptRequested = true;
+    const script = document.createElement('script');
+    script.src = CHATBOT_SCRIPT_SRC;
+    script.async = true;
+    script.dataset.medcentralChatbot = 'true';
+    document.body.appendChild(script);
+  }, []);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);

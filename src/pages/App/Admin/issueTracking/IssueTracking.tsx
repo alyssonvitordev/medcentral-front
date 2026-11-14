@@ -1,4 +1,12 @@
 import { useState, useEffect } from 'react';
+import {
+  FaChartBar,
+  FaClipboardList,
+  FaCheckCircle,
+  FaClock,
+  FaPlay,
+  FaStop,
+} from 'react-icons/fa';
 import Navbar from '../../../../components/navbar/navbar';
 import './issueTracking.css';
 
@@ -83,7 +91,7 @@ function IssueTracking({
         <div className="issue-tracking-content">
           <div className="it-header">
             <div className="it-title-section">
-              <h2>📊 Rastreamento de Problemas</h2>
+              <h2><FaChartBar className="title-icon" /> Rastreamento de Problemas</h2>
               <p>Monitoramento de solicitações e satisfação dos usuários</p>
             </div>
 
@@ -94,11 +102,13 @@ function IssueTracking({
               {simulacaoAtiva ? (
                 <>
                   <span className="pulse-dot"></span>
+                  <FaStop />
                   Desligar Simulação
                 </>
               ) : (
                 <>
-                  ▶ Iniciar Simulação
+                  <FaPlay />
+                  Iniciar Simulação
                 </>
               )}
             </button>
@@ -137,7 +147,7 @@ function IssueTracking({
           {/* Estatísticas Gerais */}
           <div className="stats-cards">
             <div className="stat-card">
-              <div className="stat-icon blue">📋</div>
+              <div className="stat-icon blue"><FaClipboardList /></div>
               <div className="stat-info">
                 <p className="stat-label">Total de Solicitações</p>
                 <p className="stat-value">{totalProblemas}</p>
@@ -145,7 +155,7 @@ function IssueTracking({
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon green">✅</div>
+              <div className="stat-icon green"><FaCheckCircle /></div>
               <div className="stat-info">
                 <p className="stat-label">Problemas Resolvidos</p>
                 <p className="stat-value">{Math.floor(totalProblemas * (satisfacao / 100))}</p>
@@ -153,7 +163,7 @@ function IssueTracking({
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon orange">⏱️</div>
+              <div className="stat-icon orange"><FaClock /></div>
               <div className="stat-info">
                 <p className="stat-label">Tempo Médio de Resposta</p>
                 <p className="stat-value">2.5h</p>

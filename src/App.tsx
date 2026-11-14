@@ -88,6 +88,19 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        {/* Abstract 3D white & blue wallpaper */}
+        <div className="liquid-wallpaper" aria-hidden="true">
+          <span className="orb orb-1" />
+          <span className="orb orb-2" />
+          <span className="orb orb-3" />
+          <span className="orb orb-4" />
+          <span className="wallpaper-ring ring-1" />
+          <span className="wallpaper-ring ring-2" />
+          <div className="wallpaper-grid" />
+          <div className="wallpaper-noise" />
+        </div>
+
+        <div className="app-content">
         <Routes>
           {/* ===== ROTAS PÚBLICAS ===== */}
           
@@ -193,39 +206,18 @@ function App() {
           <Route
             path="*"
             element={
-              <div
-                style={{
-                  minHeight: '100vh',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '20px',
-                  textAlign: 'center',
-                }}
-              >
-                <h1 style={{ fontSize: '72px', margin: '0' }}>404</h1>
-                <h2 style={{ fontSize: '24px', marginBottom: '16px' }}>
-                  Página não encontrada
-                </h2>
-                <p style={{ color: '#718096', marginBottom: '32px' }}>
-                  A página que você está procurando não existe.
-                </p>
-                <button
-                  onClick={() => (window.location.href = '/')}
-                  style={{
-                    padding: '12px 32px',
-                    background: 'var(--gradient-primary)',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '16px',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Voltar para Home
-                </button>
+              <div className="not-found">
+                <div className="not-found-card glass-panel">
+                  <span className="not-found-code">404</span>
+                  <h2>Página não encontrada</h2>
+                  <p>A página que você está procurando não existe ou foi movida.</p>
+                  <button
+                    onClick={() => (window.location.href = '/')}
+                    className="btn-cta"
+                  >
+                    Voltar para Home
+                  </button>
+                </div>
               </div>
             }
           />
@@ -233,6 +225,7 @@ function App() {
 
         {/* Componentes Globais */}
         <GlobalComponents />
+        </div>
       </div>
     </BrowserRouter>
   );
