@@ -32,9 +32,10 @@ A plataforma facilita a comunicação entre pacientes e clínicas de saúde, ofe
 
 ## Design e UI
 
+- **Design Language**: Agora na versão mais recente usamos o estilo de Design *Liquid Glass* trazendo um ar mais apegado ao futuro.
+
 ### Cores
 
-  **Design Language**: Agora na versão mais recente usamos o estilo de Design *Liquid Glass* trazendo um ar mais apegado ao futuro.
 - **Paleta de Cores**: Azul, azul claro e branco
 - **Tipografia**: Fontes system-ui para melhor legibilidade
 - **Animações**: Transições suaves para melhor experiência
