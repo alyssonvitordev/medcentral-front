@@ -34,6 +34,7 @@ A plataforma facilita a comunicação entre pacientes e clínicas de saúde, ofe
 
 ### Cores
 
+  **Design Language**: Agora na versão mais recente usamos o estilo de Design *Liquid Glass* trazendo um ar mais apegado ao futuro.
 - **Paleta de Cores**: Azul, azul claro e branco
 - **Tipografia**: Fontes system-ui para melhor legibilidade
 - **Animações**: Transições suaves para melhor experiência
@@ -53,7 +54,7 @@ Requisitos: Utilizar um navegador
 > Os navegadores recomendados são os baseado em _Chromium_ como, **Google Chrome**, **Microsoft Edge**, **Brave** etc.
 
 # Dev 
-Alysson Vitor (v1tzzzz)
+Alysson Vitor (alyssonvitordev)
 
 # Grupo
 Ana Claudia Ferreira de Souza<br>
